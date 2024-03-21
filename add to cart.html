@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart - Couture Collective</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="C:\Users\USER\Documents\303\imaages\image.png.png" alt="Couture Collective Logo" id="logo">
+        <h1>Cart - Couture Collective</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="add to cart.html">Cart</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="cart-items">
+            <h2>Shopping Cart</h2>
+            <!-- Display cart items here -->
+            <div id="cart-items-container"></div>
+            <!-- Display subtotal -->
+            <div id="subtotal">Subtotal: kshs<span id="subtotal-value">0.00</span></div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Couture Collective</p>
+    </footer>
+
+    <!-- JavaScript to display cart items and handle removal -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Retrieve cart items from localStorage
+            var cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Get the container for cart items
+            var cartItemsContainer = document.getElementById("cart-items-container");
+
+            // Get elements for subtotal display
+            var subtotalValueElement = document.getElementById("subtotal-value");
+
+            // Function to display cart items
+            function displayCartItems() {
+                // Clear previous cart items
+                cartItemsContainer.innerHTML = "";
+
+                // Initialize subtotal
+                var subtotal = 0;
+
+                // Iterate over cart items and display them
+                cart.forEach(function(product, index) {
+                    var cartItemDiv = document.createElement("div");
+                    cartItemDiv.classList.add("cart-item");
+
+                    var image = document.createElement("img");
+                    image.src = product.imageSrc;
+                    image.alt = product.name;
+
+                    var nameHeading = document.createElement("h3");
+                    nameHeading.textContent = product.name;
+
+                    var descriptionParagraph = document.createElement("p");
+                    descriptionParagraph.textContent = product.description;
+
+                    cartItemDiv.appendChild(image);
+                    cartItemDiv.appendChild(nameHeading);
+                    cartItemDiv.appendChild(descriptionParagraph);
+
+                    cartItemsContainer.appendChild(cartItemDiv);
+                });
+
+                // Update subtotal value
+                subtotalValueElement.textContent = subtotal.toFixed(2);
+            }
+
+            // Initial display of cart items
+            displayCartItems();
+        });
+    </script>
+</body>
+</html>
